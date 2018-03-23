@@ -23,8 +23,8 @@ public class TransactionController {
 		this.transactionDAO = (TransactionDAO) daoManager.getDAO("transactions");
 	}
 	
-	public List<Transaction> listTransactions(List<TransactionType> typeFilter) {
-		return null;
+	public List<Transaction> listTransactions(TransactionType typeFilter) throws SQLException {
+		return this.transactionDAO.getByType(typeFilter);
 	}
 	
 }

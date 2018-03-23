@@ -3,8 +3,10 @@ package Main.DataAccess;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
+import Main.Models.Card;
 import Main.Models.Transaction;
 import Main.Models.Transaction.TransactionType;
 
@@ -19,8 +21,25 @@ public class TransactionDAO extends BaseDAO<Transaction> {
 	public List<Transaction> get() throws SQLException {
 		String query = "select * from " + tableName;
 		ResultSet rs = this.executeQuery(query);
-
-		return null;
+		List<Transaction> transactions = new ArrayList<Transaction>();
+		while(rs.next()) {
+			Transaction transaction = getTransactionFromRow(rs);
+			transactions.add(transaction);
+		}
+		
+		return transactions;
+	}
+	
+	public List<Transaction> getByMerchantIdUserId(int merchantId, int userId) throws SQLException {
+		String query = String.format("select * from transactions where merchant_id = %d and user_id = %d", merchantId, userId);
+		ResultSet rs = this.executeQuery(query);
+		List<Transaction> transactions = new ArrayList<Transaction>();
+		while(rs.next()) {
+			Transaction transaction = getTransactionFromRow(rs);
+			transactions.add(transaction);
+		}
+		
+		return transactions;
 	}
 
 	@Override
@@ -45,6 +64,18 @@ public class TransactionDAO extends BaseDAO<Transaction> {
 			transaction = getTransactionFromRow(rs);
 		}
 		return transaction;
+	}
+	
+	public List<Transaction> getByType(TransactionType type) throws SQLException {
+		String query = String.format("select * from transactions where transaction_type = %d", type);
+		ResultSet rs = this.executeQuery(query);
+		List<Transaction> transactions = new ArrayList<Transaction>();
+		while(rs.next()) {
+			Transaction transaction = getTransactionFromRow(rs);
+			transactions.add(transaction);
+		}
+		
+		return transactions;
 	}
 
 	@Override
