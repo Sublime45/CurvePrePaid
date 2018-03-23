@@ -8,6 +8,11 @@ import java.sql.ResultSet;
 
 import Main.Models.Card;
 
+/*
+ * DAO used to access the cards table. Some of its functions are not optimized as they should be and
+ * could use a bit extending. The get functions could be generalized to a single function that gets 
+ * dynamic filters to use in the where statement of the query.
+ */
 public class CardDAO extends BaseDAO<Card>{
 	private final static String tableName = "cards";
 	
@@ -69,6 +74,9 @@ public class CardDAO extends BaseDAO<Card>{
 		this.executeQuery(query);		
 	}	
 	
+	/*
+	 * Function used to map the table fields to the appropriate fields of the Model.
+	 */
 	private Card getCardFromRow(ResultSet rs) throws SQLException {
 		Card card = new Card();
 		card.setId(rs.getInt("id"));

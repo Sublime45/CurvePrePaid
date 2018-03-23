@@ -14,6 +14,10 @@ import Main.Models.Transaction;
 import Main.Models.Transaction.TransactionType;
 import Main.Models.User;
 
+/*	
+ * A simple class created to handle all transactions related operations
+ * All functions that are mainly related to the transactions should be added to this controller
+ */
 public class TransactionController {
 	private DAOManager daoManager;
 	private TransactionDAO transactionDAO;

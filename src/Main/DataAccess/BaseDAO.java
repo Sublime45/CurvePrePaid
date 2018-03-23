@@ -6,6 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+/*
+ * Abstract class used as a parent class for all the data access objects
+ * It includes a common executeQuery function that is used by all DAO
+ */
 public abstract class BaseDAO<T> {
 	protected final String tableName;
 	protected Connection connection;

@@ -4,6 +4,12 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 
+/*
+ * This singleton class is used as a single point of communication with the database. This way the 
+ * underlying database is abstracted and encapsulated in a single class. In the case the underlying database
+ * is changed, only this class has to be changed or rewritten. It also include a factory that
+ * produces the appropriate DAO based on the table name.
+ */
 public class DAOManager {
 	private static DAOManager instance = null;
 	private MysqlDataSource dataSource;
@@ -62,6 +68,7 @@ public class DAOManager {
 
 	public void endTransaction() throws SQLException {
 		this.connection.commit();
+		this.connection.setAutoCommit(true);
 	}
 
 	public void rollBackTransaction() throws SQLException {

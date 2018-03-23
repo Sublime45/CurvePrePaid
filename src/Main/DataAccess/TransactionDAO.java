@@ -9,7 +9,9 @@ import java.util.List;
 import Main.Models.Card;
 import Main.Models.Transaction;
 import Main.Models.Transaction.TransactionType;
-
+/*
+ * The DAO used to interact with the "transactions table"
+ */
 public class TransactionDAO extends BaseDAO<Transaction> {
 	private final static String tableName = "transactions";
 
@@ -97,6 +99,9 @@ public class TransactionDAO extends BaseDAO<Transaction> {
 		this.executeQuery(query);
 	}
 
+	/*
+	 * The function that maps the transactions table fields to the Transaction model member variables
+	 */
 	private Transaction getTransactionFromRow(ResultSet rs) throws SQLException {
 		Transaction transaction = new Transaction();
 		transaction.setAmount(rs.getFloat("amount"));
